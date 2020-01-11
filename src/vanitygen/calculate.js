@@ -36,7 +36,7 @@ function calculateAt(atOffset, test, address) {
   };
 }
 
-module.exports = function calculate(test, _address, {atOffset = 44, withCase = false, withEnd = true}) {
+module.exports = function calculate(test, _address, {atOffset, withCase = false, withEnd = false}) {
   const address = withCase
       ? _address
       : _address.toLowerCase();
@@ -52,7 +52,7 @@ module.exports = function calculate(test, _address, {atOffset = 44, withCase = f
     const length = address.length;
     let number = length - test.length;
     for (let index = number; index >= number - MAX_OFFSET; index--) {
-      const {count, offset} = calculateAt(index, test, address, true);
+      const {count, offset} = calculateAt(index, test, address);
       
       if (count > bestCount) {
         bestCount = count;

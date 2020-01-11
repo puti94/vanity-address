@@ -29,6 +29,13 @@
         </div>
       </van-field>
       <van-field
+          label="匹配结尾"
+      >
+        <div slot="input" class="switch-container">
+          <van-switch v-model="withEnd"/>
+        </div>
+      </van-field>
+      <van-field
           v-if="hasType"
           readonly
           clickable
@@ -94,6 +101,7 @@ export default {
       keyCount: 0,
       keyTime: 0,
       showType: false,
+      withEnd: false,
       withHex: true,
       actions: [
         {name: 'sr25519', value: 'sr25519'},
@@ -129,7 +137,7 @@ export default {
             
             return result.concat(found);
           }, this.matches)
-          .sort((a, b) => generatorSort(a, b, true))
+          .sort((a, b) => generatorSort(a, b, this.withEnd))
           .slice(0, 15);
       const elapsed = Date.now() - this.startAt;
       this.elapsed = elapsed
@@ -158,7 +166,7 @@ export default {
           this.checkMatches();
         }
         
-        const {match, type, withCase, withHex, ss58Format} = this;
+        const {match, type, withCase, withHex, ss58Format,withEnd} = this;
         
         this.results.push(
             generator({
@@ -167,7 +175,8 @@ export default {
               type,
               withCase,
               withHex,
-              ss58Format
+              ss58Format,
+              withEnd
             })
         );
         this.executeGeneration();
