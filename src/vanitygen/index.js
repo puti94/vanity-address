@@ -5,7 +5,7 @@
 
 const  generate  = require('./generate');
 
-module .exports = function generator (options) {
+module.exports = function generator (options) {
   const { match, runs = 10, withCase = false } = options;
   const test = (withCase ? match : match.toLowerCase()).split(',').map((c) => c.split(''));
   const startAt = Date.now();

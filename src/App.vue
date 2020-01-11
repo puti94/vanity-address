@@ -29,13 +29,15 @@
         </div>
       </van-field>
       <van-field
+          v-if="hasType"
           readonly
           clickable
-          label="秘钥类型"
+          label="加密类型"
           :value="type"
           @click="showType = true"
       />
       <van-field
+          v-if="hasSs59Format"
           v-model="ss58Format"
           label="地址前缀"
           placeholder=""
@@ -65,6 +67,7 @@ import generator from './vanitygen';
 import matchRegex from './vanitygen/regex';
 import generatorSort from './vanitygen/sort';
 import Match from './Match'
+import {parseUrl} from 'query-string';
 
 export default {
   name: 'app',
@@ -72,15 +75,21 @@ export default {
     Match
   },
   data() {
+    const {query = {}} = parseUrl(location.href);
+    // eslint-disable-next-line no-console
+    // console.log('query', query)
+    const {type = 'sr25519', ss58Format = '40', match = 'some'} = query;
     return {
+      hasSs59Format: !query.ss58Format,
+      hasType: !query.type,
       results: [],
       matches: [],
-      match: 'some',
-      ss58Format: 40,
-      withCase: true,
+      match,
+      ss58Format,
+      withCase: false,
       startAt: 0,
       elapsed: 0,
-      type: 'ed25519',
+      type,
       isRunning: false,
       keyCount: 0,
       keyTime: 0,
@@ -90,6 +99,7 @@ export default {
         {name: 'sr25519', value: 'sr25519'},
         {name: 'ed25519', value: 'ed25519'},
       ],
+      des: [{title: '', value: ''}],
     }
   },
   computed: {
@@ -119,8 +129,8 @@ export default {
             
             return result.concat(found);
           }, this.matches)
-          .sort(generatorSort)
-          .slice(0, 25);
+          .sort((a, b) => generatorSort(a, b, true))
+          .slice(0, 15);
       const elapsed = Date.now() - this.startAt;
       this.elapsed = elapsed
       this.matches = newMatches
@@ -148,12 +158,12 @@ export default {
           this.checkMatches();
         }
         
-        const {match, type, withCase, withHex,ss58Format} = this;
+        const {match, type, withCase, withHex, ss58Format} = this;
         
         this.results.push(
             generator({
               match,
-              runs: 10,
+              runs: 5,
               type,
               withCase,
               withHex,

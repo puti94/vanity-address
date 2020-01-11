@@ -1,11 +1,13 @@
 .DS_Store
 node_modules
 /dist
-
+/code
+serverless.yml
 # local env files
 .env.local
 .env.*.local
-
+.env_temp
+/.serverless
 # Log files
 npm-debug.log*
 yarn-debug.log*

@@ -13,14 +13,14 @@ function numberSort (a, b) {
   return 0;
 }
 
-module .exports = function sort (a, b) {
+module.exports = function sort (a, b, withEnd) {
   const countResult = numberSort(a.count, b.count);
 
   if (countResult !== 0) {
     return countResult;
   }
-
-  const positionResult = numberSort(b.offset, a.offset);
+  
+  const positionResult = numberSort(withEnd ? a.offset : b.offset,withEnd ? b.offset : a.offset);
 
   if (positionResult !== 0) {
     return positionResult;
