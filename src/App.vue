@@ -22,7 +22,8 @@
         </div>
       </van-field>
       <van-field
-          label="24位助记词"
+          label="生成12位助记词"
+          label-width="240px"
       >
         <div slot="input" class="switch-container">
           <van-switch v-model="withHex"/>
@@ -102,7 +103,7 @@ export default {
       keyTime: 0,
       showType: false,
       withEnd: false,
-      withHex: true,
+      withHex: false,
       actions: [
         {name: 'sr25519', value: 'sr25519'},
         {name: 'ed25519', value: 'ed25519'},
@@ -245,7 +246,6 @@ export default {
   }
   
   .switch-container {
-    width: 100%;
     display: flex;
     justify-content: flex-end;
   }

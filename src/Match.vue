@@ -16,7 +16,7 @@
       <p class="address seed">私钥:<span>{{hexSeed}}</span>
         <van-icon class="copy" name="description" @click="setText(hexSeed)"/>
       </p>
-      <p class="address seed">助记词:<span>{{mnemonic}}</span>
+      <p class="address seed" v-if="mnemonic">助记词:<span>{{mnemonic}}</span>
         <van-icon class="copy" name="description" @click="setText(mnemonic)"/>
       </p>
     </div>
@@ -26,13 +26,13 @@
 <script>
 
 import {u8aToHex} from '@polkadot/util';
-import {entropyToMnemonic} from 'bip39';
 import Clipboard from 'clipboard'
 
 export default {
   name: 'Match',
   props: {
     address: String,
+    mnemonic: String,
     seed: Uint8Array,
     count: Number,
     offset: Number,
@@ -45,9 +45,6 @@ export default {
   computed: {
     hexSeed() {
       return u8aToHex(this.seed)
-    },
-    mnemonic() {
-      return entropyToMnemonic(this.seed)
     },
   },
   methods: {

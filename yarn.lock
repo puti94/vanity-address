@@ -677,6 +677,13 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
+"@babel/runtime@^7.7.7":
+  version "7.9.2"
+  resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.9.2.tgz#d90df0583a3a252f09aaa619665367bae518db06"
+  integrity sha1-2Q3wWDo6JS8JqqYZZlNnuuUY2wY=
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.7.4":
   version "7.7.4"
   resolved "https://registry.npm.taobao.org/@babel/template/download/@babel/template-7.7.4.tgz?cache=0&sync_timestamp=1574465630781&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Ftemplate%2Fdownload%2F%40babel%2Ftemplate-7.7.4.tgz#428a7d9eecffe27deac0a98e23bf8e3675d2a77b"
@@ -765,12 +772,12 @@
   integrity sha1-K1o6s/kYzKSKjHVMCBaOPwPrphs=
 
 "@polkadot/util-crypto@^1.7.1":
-  version "1.7.1"
-  resolved "https://registry.npm.taobao.org/@polkadot/util-crypto/download/@polkadot/util-crypto-1.7.1.tgz#6cb1ed1f7ecbea3b41100231830817e7fd116dc6"
-  integrity sha1-bLHtH37L6jtBEAIxgwgX5/0RbcY=
+  version "1.8.1"
+  resolved "https://registry.npm.taobao.org/@polkadot/util-crypto/download/@polkadot/util-crypto-1.8.1.tgz#dbc3f75c4a780bd31cd37e63cf27bade54728646"
+  integrity sha1-28P3XEp4C9Mc035jzye63lRyhkY=
   dependencies:
-    "@babel/runtime" "^7.7.4"
-    "@polkadot/util" "^1.7.1"
+    "@babel/runtime" "^7.7.7"
+    "@polkadot/util" "^1.8.1"
     "@polkadot/wasm-crypto" "^0.14.1"
     "@types/bip39" "^2.4.2"
     "@types/bs58" "^4.0.0"
@@ -782,17 +789,17 @@
     blakejs "^1.1.0"
     bs58 "^4.0.1"
     js-sha3 "^0.8.0"
-    secp256k1 "^3.7.0"
+    secp256k1 "^3.8.0"
     tweetnacl "^1.0.1"
     xxhashjs "^0.2.2"
 
-"@polkadot/util@^1.7.1":
-  version "1.7.1"
-  resolved "https://registry.npm.taobao.org/@polkadot/util/download/@polkadot/util-1.7.1.tgz#cb262fa5a441097c0c093532f70d0b7e0503fbb1"
-  integrity sha1-yyYvpaRBCXwMCTUy9w0LfgUD+7E=
+"@polkadot/util@^1.8.1":
+  version "1.8.1"
+  resolved "https://registry.npm.taobao.org/@polkadot/util/download/@polkadot/util-1.8.1.tgz#7473383a1eb26bec59cca53643cf07bc078fe052"
+  integrity sha1-dHM4Oh6ya+xZzKU2Q88HvAeP4FI=
   dependencies:
-    "@babel/runtime" "^7.7.4"
-    "@types/bn.js" "^4.11.5"
+    "@babel/runtime" "^7.7.7"
+    "@types/bn.js" "^4.11.6"
     bn.js "^4.11.8"
     camelcase "^5.3.1"
     chalk "^3.0.0"
@@ -820,10 +827,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/bn.js@^4.11.5":
-  version "4.11.5"
-  resolved "https://registry.npm.taobao.org/@types/bn.js/download/@types/bn.js-4.11.5.tgz#40e36197433f78f807524ec623afcf0169ac81dc"
-  integrity sha1-QONhl0M/ePgHUk7GI6/PAWmsgdw=
+"@types/bn.js@^4.11.6":
+  version "4.11.6"
+  resolved "https://registry.npm.taobao.org/@types/bn.js/download/@types/bn.js-4.11.6.tgz#c306c70d9358aaea33cd4eda092a742b9505967c"
+  integrity sha1-wwbHDZNYquozzU7aCSp0K5UFlnw=
   dependencies:
     "@types/node" "*"
 
@@ -881,9 +888,9 @@
   integrity sha1-aQoUdbhPKohP0HzXl8APXzE1bqg=
 
 "@types/secp256k1@^3.5.0":
-  version "3.5.0"
-  resolved "https://registry.npm.taobao.org/@types/secp256k1/download/@types/secp256k1-3.5.0.tgz#0f3baf16b07488c6da2633a63b4160bcf8d0fd5b"
-  integrity sha1-DzuvFrB0iMbaJjOmO0FgvPjQ/Vs=
+  version "3.5.3"
+  resolved "https://registry.npm.taobao.org/@types/secp256k1/download/@types/secp256k1-3.5.3.tgz#57ebfdd19d476de3ff13758cf7b6d9e420d54c19"
+  integrity sha1-V+v90Z1HbeP/E3WM97bZ5CDVTBk=
   dependencies:
     "@types/node" "*"
 
@@ -1616,10 +1623,17 @@ base-x@3.0.5:
   dependencies:
     safe-buffer "^5.0.1"
 
-base-x@^3.0.2, base-x@^3.0.6:
+base-x@^3.0.2:
   version "3.0.7"
   resolved "https://registry.npm.taobao.org/base-x/download/base-x-3.0.7.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fbase-x%2Fdownload%2Fbase-x-3.0.7.tgz#1c5a7fafe8f66b4114063e8da102799d4e7c408f"
   integrity sha1-HFp/r+j2a0EUBj6NoQJ5nU58QI8=
+  dependencies:
+    safe-buffer "^5.0.1"
+
+base-x@^3.0.6:
+  version "3.0.8"
+  resolved "https://registry.npm.taobao.org/base-x/download/base-x-3.0.8.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fbase-x%2Fdownload%2Fbase-x-3.0.8.tgz#1e1106c2537f0162e8b52474a557ebb09000018d"
+  integrity sha1-HhEGwlN/AWLotSR0pVfrsJAAAY0=
   dependencies:
     safe-buffer "^5.0.1"
 
@@ -6649,6 +6663,11 @@ regenerator-runtime@^0.13.2:
   resolved "https://registry.npm.taobao.org/regenerator-runtime/download/regenerator-runtime-0.13.3.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fregenerator-runtime%2Fdownload%2Fregenerator-runtime-0.13.3.tgz#7cf6a77d8f5c6f60eb73c5fc1955b2ceb01e6bf5"
   integrity sha1-fPanfY9cb2Drc8X8GVWyzrAea/U=
 
+regenerator-runtime@^0.13.4:
+  version "0.13.5"
+  resolved "https://registry.npm.taobao.org/regenerator-runtime/download/regenerator-runtime-0.13.5.tgz?cache=0&sync_timestamp=1584052481783&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fregenerator-runtime%2Fdownload%2Fregenerator-runtime-0.13.5.tgz#d878a1d094b4306d10b9096484b33ebd55e26697"
+  integrity sha1-2Hih0JS0MG0QuQlkhLM+vVXiZpc=
+
 regenerator-transform@^0.14.0:
   version "0.14.1"
   resolved "https://registry.npm.taobao.org/regenerator-transform/download/regenerator-transform-0.14.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fregenerator-transform%2Fdownload%2Fregenerator-transform-0.14.1.tgz#3b2fce4e1ab7732c08f665dfdb314749c7ddd2fb"
@@ -6938,7 +6957,7 @@ schema-utils@^2.0.0, schema-utils@^2.5.0, schema-utils@^2.6.0, schema-utils@^2.6
     ajv "^6.10.2"
     ajv-keywords "^3.4.1"
 
-secp256k1@^3.7.0:
+secp256k1@^3.8.0:
   version "3.8.0"
   resolved "https://registry.npm.taobao.org/secp256k1/download/secp256k1-3.8.0.tgz#28f59f4b01dbee9575f56a47034b7d2e3b3b352d"
   integrity sha1-KPWfSwHb7pV19WpHA0t9Ljs7NS0=
@@ -7794,9 +7813,9 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   integrity sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=
 
 tweetnacl@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npm.taobao.org/tweetnacl/download/tweetnacl-1.0.1.tgz#2594d42da73cd036bd0d2a54683dd35a6b55ca17"
-  integrity sha1-JZTULac80Da9DSpUaD3TWmtVyhc=
+  version "1.0.3"
+  resolved "https://registry.npm.taobao.org/tweetnacl/download/tweetnacl-1.0.3.tgz?cache=0&sync_timestamp=1581364203962&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftweetnacl%2Fdownload%2Ftweetnacl-1.0.3.tgz#ac0af71680458d8a6378d0d0d050ab1407d35596"
+  integrity sha1-rAr3FoBFjYpjeNDQ0FCrFAfTVZY=
 
 type-check@~0.3.2:
   version "0.3.2"

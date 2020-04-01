@@ -10,8 +10,7 @@ const calculate = require('./calculate');
 
 module.exports = function generator (test, options) {
   const mnemonic = options.withHex
-      ? undefined
-      : mnemonicGenerate(12);
+      ? mnemonicGenerate(12) : undefined;
   const seed = mnemonic
       ? mnemonicToMiniSecret(mnemonic)
       : randomAsU8a();
