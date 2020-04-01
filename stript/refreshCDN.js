@@ -17,7 +17,7 @@ if (!fs.existsSync(file)) return;
 const str = fs.readFileSync(file).toString();
 const {SecretId, SecretKey, token} = JSON.parse(str);
 const cred = new Credential(SecretId, SecretKey, token);
-const client = new CndClient(cred, 'ap-guangzhou');
+const client = new CndClient(cred);
 const req = new models.PurgeUrlsCacheRequest();
 req.deserialize({Urls: ['https://va.substrate.top']});
 client.PurgeUrlsCache(req, function (err, response) {
