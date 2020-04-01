@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "deploy": "yarn build && sls --debug",
+    "deploy": "yarn build && sls --debug && node ./stript/refreshCDN.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -26,6 +26,7 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "postcss-px2rem-exclude": "^0.0.6",
+    "tencentcloud-sdk-nodejs": "^3.0.144",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
