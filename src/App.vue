@@ -6,6 +6,17 @@
         @cancel="showType=false"
         @select="onSelect"
         :actions="actions"/>
+    <div class="des">
+      <p class="title">项目说明:</p>
+      <p class="content">基于substrate底层技术区块链的地址靓号生成器，原理基于随机哈希碰撞匹配字符串，可断网运行。</p>
+      <p class="title">字段说明:</p>
+      <p class="content">匹配名:正则规则^[1-9A-HJ-NP-Za-km-z?,]*$，3-5位匹配效率高</p>
+      <p class="content">生成12位助记词:所有生成地址都含有私钥，只匹配12位助记词效率非常低。如果需要生成12位助记词可勾选</p>
+      <p class="content">匹配尾部:默认匹配是基于头部匹配，如果需要匹配尾部请勾选</p>
+      <p class="content">加密类型:密码学类型ed25519,sr25519，默认sr25519</p>
+      <p class="content">
+        地址前缀:SS58是一种简单的地址格式，设计用于基于基片的链。一些默认值default(-1)substrate(42)polkadot(0)kusama(2)edgeware(7)centrifuge(36)</p>
+    </div>
     <div class="form">
       <van-field
           v-model="match"
@@ -30,7 +41,7 @@
         </div>
       </van-field>
       <van-field
-          label="匹配结尾"
+          label="匹配尾部"
       >
         <div slot="input" class="switch-container">
           <van-switch v-model="withEnd"/>
@@ -86,14 +97,14 @@ export default {
     const {query = {}} = parseUrl(location.href);
     // eslint-disable-next-line no-console
     // console.log('query', query)
-    const {type = 'sr25519', format = '40', match = 'test'} = query;
+    const {type = 'sr25519', format = '-1', match = 'test'} = query;
     return {
       hasSs59Format: !query.format,
       hasType: !query.type,
       results: [],
       matches: [],
       match,
-      ss58Format:format,
+      ss58Format: format,
       withCase: false,
       startAt: 0,
       elapsed: 0,
@@ -167,7 +178,7 @@ export default {
           this.checkMatches();
         }
         
-        const {match, type, withCase, withHex, ss58Format,withEnd} = this;
+        const {match, type, withCase, withHex, ss58Format, withEnd} = this;
         
         this.results.push(
             generator({
@@ -212,6 +223,19 @@ export default {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
+  }
+  
+  .des {
+    width: 360px;
+    margin-left: 14px;
+  }
+  
+  .des .title {
+    font-size: 10px;
+  }
+  
+  .des .content {
+    font-size: 8px;
   }
   
   .form {
