@@ -1,4 +1,5 @@
-# addressgenerate
+# substrate-vanity-address
+## substrate底层架构的靓号生成器
 
 ## Project setup
 ```
@@ -24,6 +25,3 @@ yarn run test
 ```
 yarn run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
