@@ -4,36 +4,40 @@
 // of the Apache-2.0 license. See the LICENSE file for details.
 
 
-const  yargs  = require('yargs');
-const  chalk  = require('chalk');
-const  { u8aToHex }  = require('@polkadot/util');
-const  { cryptoWaitReady, setSS58Format }  = require('@polkadot/util-crypto');
+const yargs = require('yargs');
+const chalk = require('chalk');
+const {u8aToHex} = require('@polkadot/util');
+const {cryptoWaitReady, setSS58Format} = require('@polkadot/util-crypto');
 
-const  generator  = require('.');
-const  matchRegex  = require('./regex');
+const generator = require('.');
+const matchRegex = require('./regex');
 
-const { match, mnemonic, network, type, withCase } = yargs
-  .option('match', {
-    default: 'Test',
-    type: 'string'
-  })
-  .option('mnemonic', {
-    default: false,
-    type: 'boolean'
-  })
-  .option('network', {
-    choices: ['substrate', 'polkadot', 'kusama'],
-    default: 'substrate'
-  })
-  .option('type', {
-    choices: ['ed25519', 'sr25519'],
-    default: 'sr25519'
-  })
-  .option('withCase', {
-    default: false,
-    type: 'boolean'
-  })
-  .argv;
+const {match, mnemonic, network, type, withCase, ss58} = yargs
+    .option('match', {
+      default: 'Test',
+      type: 'string'
+    })
+    .option('mnemonic', {
+      default: false,
+      type: 'boolean'
+    })
+    .option('network', {
+      choices: ['substrate', 'polkadot', 'kusama'],
+      default: 'substrate'
+    })
+    .option('ss58', {
+      type: 'string',
+      default: ''
+    })
+    .option('type', {
+      choices: ['ed25519', 'sr25519'],
+      default: 'sr25519'
+    })
+    .option('withCase', {
+      default: false,
+      type: 'boolean'
+    })
+    .argv;
 
 const INDICATORS = ['|', '/', '-', '\\'];
 const NUMBER_REGEX = new RegExp('(\\d+?)(?=(\\d{3})+(?!\\d)|$)', 'g');
@@ -44,7 +48,7 @@ const options = {
   runs: 50,
   type: type,
   withCase,
-  withHex: !mnemonic
+  withHex: mnemonic
 };
 const startAt = Date.now();
 let best = {
@@ -67,56 +71,59 @@ switch (network) {
   case 'kusama':
     setSS58Format(2);
     break;
-
+  
   case 'polkadot':
     setSS58Format(0);
     break;
-
+  
   default:
     setSS58Format(42);
     break;
 }
+if (ss58) {
+  setSS58Format(ss58);
+}
 
 console.log(options);
 
-function showProgress () {
+function showProgress() {
   const elapsed = (Date.now() - startAt) / 1000;
-
+  
   indicator++;
-
+  
   if (indicator === INDICATORS.length) {
     indicator = 0;
   }
-
+  
   process.stdout.write(`\r[${INDICATORS[indicator]}] ${(total.toString().match(NUMBER_REGEX) || []).join(',')} keys in ${(elapsed).toFixed(2)}s (${(total / elapsed).toFixed(0)} keys/s)`);
 }
 
-function showBest () {
-  const { address, count, mnemonic, offset, seed } = best;
-
+function showBest() {
+  const {address, count, mnemonic, offset, seed} = best;
+  
   console.log(`\r::: ${address.slice(0, offset)}${chalk.cyan(address.slice(offset, count + offset))}${address.slice(count + offset)} <= ${u8aToHex(seed)} (count=${count}, offset=${offset})${mnemonic ? '\n                                                        ' + mnemonic : ''}`);
 }
 
 cryptoWaitReady()
-  .then(() => {
-    while (true) {
-      const nextBest = generator(options).found.reduce((best, match) => {
-        if ((match.count > best.count) || ((match.count === best.count) && (match.offset <= best.offset))) {
-          return match;
+    .then(() => {
+      while (true) {
+        const nextBest = generator(options).found.reduce((best, match) => {
+          if ((match.count > best.count) || ((match.count === best.count) && (match.offset <= best.offset))) {
+            return match;
+          }
+          
+          return best;
+        }, best);
+        
+        total += options.runs;
+        
+        if (nextBest.address !== best.address) {
+          best = nextBest;
+          showBest();
+          showProgress();
+        } else if ((total % (options.withHex ? 1000 : 100)) === 0) {
+          showProgress();
         }
-
-        return best;
-      }, best);
-
-      total += options.runs;
-
-      if (nextBest.address !== best.address) {
-        best = nextBest;
-        showBest();
-        showProgress();
-      } else if ((total % (options.withHex ? 1000 : 100)) === 0) {
-        showProgress();
       }
-    }
-  })
-  .catch((error) => console.error(error));
+    })
+    .catch((error) => console.error(error));
