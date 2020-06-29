@@ -97,7 +97,7 @@ export default {
     const {query = {}} = parseUrl(location.href);
     // eslint-disable-next-line no-console
     // console.log('query', query)
-    const {type = 'sr25519', ss58 = '-1', match = 'test'} = query;
+    const {type = 'sr25519', ss58 = '0', match = 'test'} = query;
     return {
       hasSs59Format: !query.ss58,
       hasType: !query.type,
